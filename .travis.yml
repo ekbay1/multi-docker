@@ -1,5 +1,4 @@
 language: generic 
-sudo: required
 services:
   - docker
 
@@ -9,13 +8,13 @@ before_install:
 script:
   - docker run -e CI=true eliasabay/react-test npm test
 
-after_successs:
+after_success:
   - docker build -t eliasabay/multi-client ./client
   - docker build -t eliasabay/multi-nginx ./nginx
   - docker build -t eliasabay/multi-server ./server
   - docker build -t eliasabay/multi-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_ID --password-stdin docker.io
-  - docker push eliasabay/multi-client
-  - docker push eliasabay/multi-nginx
-  - docker push eliasabay/multi-server
-  - docker push eliasabay/multi-worker
+  - docker push eliasabay/multi-client:latest
+  - docker push eliasabay/multi-nginx:latest
+  - docker push eliasabay/multi-server:latest
+  - docker push eliasabay/multi-worker:latest
