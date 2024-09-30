@@ -14,7 +14,11 @@ after_success:
   - docker build -t eliasabay/multi-server ./server
   - docker build -t eliasabay/multi-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_ID --password-stdin docker.io
-  - docker push eliasabay/multi-client:latest
-  - docker push eliasabay/multi-nginx:latest
-  - docker push eliasabay/multi-server:latest
-  - docker push eliasabay/multi-worker:latest
+  - docker tag eliasabay/multi-client:latest eliasabay/dockerhub:multi-client:latest
+  - docker push eliasabay/dockerhub:multi-client:latest
+  - docker tag eliasabay/multi-nginx:latest eliasabay/dockerhub:multi-nginx:latest
+  - docker push eliasabay/dockerhub:multi-nginx:latest
+  - docker tag eliasabay/multi-server:latest eliasabay/dockerhub:multi-server:latest
+  - docker push eliasabay/dockerhub:multi-server:latest
+  - docker tag eliasabay/multi-worker:latest eliasabay/dockerhub:multi-worker:latest
+  - docker push eliasabay/dockerhub:multi-worker:latest
