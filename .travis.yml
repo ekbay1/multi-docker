@@ -9,16 +9,12 @@ script:
   - docker run -e CI=true eliasabay/react-test npm test
 
 after_success:
-  - docker build -t eliasabay/multi-client ./client
-  - docker build -t eliasabay/multi-nginx ./nginx
-  - docker build -t eliasabay/multi-server ./server
-  - docker build -t eliasabay/multi-worker ./worker
+  - docker build -t eabay123/multi-client ./client
+  - docker build -t eabay123/multi-nginx ./nginx
+  - docker build -t eabay123/multi-server ./server
+  - docker build -t eabay123/multi-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_ID --password-stdin docker.io
-  - docker tag eliasabay/multi-client:latest eliasabay/dockerhub:multi-client:latest
-  - docker push eliasabay/dockerhub:multi-client:latest
-  - docker tag eliasabay/multi-nginx:latest eliasabay/dockerhub:multi-nginx:latest
-  - docker push eliasabay/dockerhub:multi-nginx:latest
-  - docker tag eliasabay/multi-server:latest eliasabay/dockerhub:multi-server:latest
-  - docker push eliasabay/dockerhub:multi-server:latest
-  - docker tag eliasabay/multi-worker:latest eliasabay/dockerhub:multi-worker:latest
-  - docker push eliasabay/dockerhub:multi-worker:latest
+  - docker push eabay123/multi-client
+  - docker push eabay123/multi-nginx
+  - docker push eabay123/multi-server
+  - docker push eabay123/multi-worker
